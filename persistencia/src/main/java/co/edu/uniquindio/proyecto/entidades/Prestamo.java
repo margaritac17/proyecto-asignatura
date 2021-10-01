@@ -3,10 +3,12 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,6 +23,18 @@ public class Prestamo implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
+    @Column(nullable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime fechaPrestamo;
+
+    @Future
+    @Column(nullable=false)
     private LocalDate fechaDevolucion;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Usuario usuarioPrestamo;
+
+    @ManyToMany
+    private List<Libro> libros;
+
 }
