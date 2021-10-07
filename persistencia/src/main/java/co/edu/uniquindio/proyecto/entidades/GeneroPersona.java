@@ -1,4 +1,5 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-public class GeneroPersona {
+public enum GeneroPersona {
+    MASCULINO, FEMENINO
 }
