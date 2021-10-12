@@ -27,16 +27,15 @@ public class Comentario implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario usuario;
 
+    //Tipo LongText
     @Column(nullable = false)
     private String mensaje;
 
-    @Column(nullable = false)
+    //Tipo LongText
     private String respuesta;
 
-    //Fecha actual
-    @Column(nullable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime fechaComentario;
+    @Column(nullable=false)
+    private LocalDateTime fecha;
 
-    @Column(nullable = false)
     private Integer calificacion;
 }

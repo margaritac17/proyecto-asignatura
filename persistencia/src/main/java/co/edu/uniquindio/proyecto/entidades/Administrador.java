@@ -1,24 +1,18 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Getter
-@Setter
+//@Entity
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Administrador implements Serializable {
+@ToString(callSuper = true)
+public class Administrador extends Persona implements Serializable {
 
     @Id
     @Column(length= 18)
     @EqualsAndHashCode.Include
-    private String codigo;
-
+    private String codigoAdmin;
 
 }

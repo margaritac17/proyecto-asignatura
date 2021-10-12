@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
+import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
@@ -30,27 +31,23 @@ public class UsuarioTest {
     @Test
     @Sql("classpath:data.sql")
     public void registrarTest(){
-/*
-        Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
 
-        HashMap<String, String> telefonos = new HashMap<>();
-        telefonos.put("casa", "171717");
-        telefonos.put("celular", "9828985");
-        Usuario usuario = new Usuario("123", "pepito", LocalDate.now(), GeneroPersona.MASCULINO, "pepito@email.com", telefonos, ciudad);
+        Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
+        Usuario usuario = Usuario.builder().codigo("126").nombre("Luisito").email("luisito@email.com").password("12345").username("Luisito").ciudad(ciudad).build();
 
         Usuario usuarioGuardado= usuarioRepo.save(usuario);
         Assertions.assertNotNull(usuarioGuardado);
-*/
     }
 
     @Test
     @Sql("classpath:data.sql")
     public void eliminarTest(){
 
-        usuarioRepo.deleteById("123");
+        Usuario usuario =usuarioRepo.findById("125").orElse(null);
+        usuarioRepo.delete(usuario);
 
-        Usuario usuarioBuscado = usuarioRepo.findById("123").orElse(null);
-        Assertions.assertNull(usuarioBuscado);
+        Usuario usuarioEliminado = usuarioRepo.findById("125").orElse(null);
+        Assertions.assertNull(usuarioEliminado);
 
     }
 
@@ -58,21 +55,20 @@ public class UsuarioTest {
     @Sql("classpath:data.sql")
     public void ActualizarTest(){
 
-        Usuario guardado = usuarioRepo.findById("124").orElse(null);
-        guardado.setEmail("maria_correonuevo@email.com");
-        usuarioRepo.save(guardado);
+        Usuario usuario = usuarioRepo.findById("125").orElse(null);
+        usuario.setPassword("1111");
+        usuarioRepo.save(usuario);
 
-        Usuario usuarioBuscado = usuarioRepo.findById("124").orElse(null);
-        Assertions.assertEquals("maria_correonuevo@email.com", usuarioBuscado.getEmail());
+        Usuario usuarioActualizado = usuarioRepo.findById("125").orElse(null);
+        Assertions.assertEquals("1111", usuarioActualizado.getPassword());
 
     }
 
     @Test
     @Sql("classpath:data.sql")
     public void listarTest(){
-        List<Usuario> usuarios = usuarioRepo.findAll();
-        usuarios.forEach( u -> System.out.println(u));
-
+        List<Usuario> lista = usuarioRepo.findAll();
+        Assertions.assertEquals(3, lista.size());
     }
 
     @Test
@@ -85,7 +81,7 @@ public class UsuarioTest {
     @Test
     @Sql("classpath:data.sql")
     public void filtrarEmailTest(){
-        Optional<Usuario> usuario = usuarioRepo.findByEmail("carlos@email.com");
+        Optional<Usuario> usuario = usuarioRepo.findByEmail("pepe@email.com");
        if(usuario.isPresent()){
            System.out.println(usuario.get());
        }else{

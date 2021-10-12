@@ -46,19 +46,9 @@ public class Usuario extends Persona implements Serializable {
 
     @Builder
     public Usuario(String codigo, String nombre, String email, String password, String username, Ciudad ciudad) {
+        super(codigo, nombre, email, password);
         this.username = username;
         this.ciudad = ciudad;
     }
 
-    public Usuario(List<String> telefonos, String username, Ciudad ciudad, List<Producto> productosVenta, List<Comentario> comentarios, List<Compra> compras, List<DetalleSubasta> detalleSubastas, List<Chat> chats, List<Producto> productosFavoritos) {
-        this.telefonos = telefonos;
-        this.username = username;
-        this.ciudad = ciudad;
-        this.productosVenta = productosVenta;
-        this.comentarios = comentarios;
-        this.compras = compras;
-        this.detalleSubastas = detalleSubastas;
-        this.chats = chats;
-        this.productosFavoritos = productosFavoritos;
-    }
 }

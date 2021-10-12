@@ -39,7 +39,7 @@ public class Producto implements Serializable {
 
 
     @Column( nullable=false)
-    private Integer descuento;
+    private Double descuento;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -70,8 +70,11 @@ public class Producto implements Serializable {
     @ManyToMany(mappedBy = "productosFavoritos")
     private List<Usuario> usuariosFavoritos;
 
+    @ElementCollection
+    @Column(nullable = false)
+    private List<Categoria> categorias;
 
-    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, Double precio, LocalDateTime fecha_limite, Integer descuento, Ciudad ciudad, Usuario vendedor) {
+    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, Double precio, LocalDateTime fecha_limite, Double descuento, Ciudad ciudad, Usuario vendedor) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.unidades = unidades;
