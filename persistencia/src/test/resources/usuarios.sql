@@ -7,3 +7,4 @@ insert into usuario values ("125", "2000/10/09" , "MASCULINO", "Luis", "Luis@ema
 
 insert into usuario_num_telefonos values ("123", "718718", "casa");
 insert into usuario_num_telefonos values ("123", "2232", "trabajo");
+

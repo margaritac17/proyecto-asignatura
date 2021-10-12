@@ -1,42 +1,64 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
 
-    @Column(length = 120, nullable=false, unique=true)
-    private String email;
-
     @ElementCollection
-    @Column(nullable = false)
-    private Map<String,String> numTelefonos;
+    private List<String> telefonos;
+
+    @Column(nullable = false, unique=true)
+    private String username;
 
     @ManyToOne
     @JoinColumn(nullable = false)
     private Ciudad ciudad;
 
-
-    @OneToMany(mappedBy = "usuarioPrestamo")
+    @OneToMany(mappedBy = "vendedor")
     @ToString.Exclude
-    private List<Prestamo> prestamos;
+    private List<Producto> productosVenta;
 
-    public Usuario(String codigo, String nombre, LocalDate fechaNacimiento, GeneroPersona genero, String email, Map<String, String> numTelefonos, Ciudad ciudad) {
-        super(codigo, nombre, fechaNacimiento, genero);
-        this.email = email;
-        this.numTelefonos = numTelefonos;
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private List<Comentario> comentarios;
+
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private List<Compra> compras;
+
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private List<DetalleSubasta> detalleSubastas;
+
+
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private List<Chat> chats;
+
+    @ManyToMany
+    private List<Producto> productosFavoritos;
+
+    @Builder
+    public Usuario(String codigo, String nombre, String email, String password, String username, Ciudad ciudad) {
+        this.username = username;
         this.ciudad = ciudad;
     }
 
+    public Usuario(List<String> telefonos, String username, Ciudad ciudad, List<Producto> productosVenta, List<Comentario> comentarios, List<Compra> compras, List<DetalleSubasta> detalleSubastas, List<Chat> chats, List<Producto> productosFavoritos) {
+        this.telefonos = telefonos;
+        this.username = username;
+        this.ciudad = ciudad;
+        this.productosVenta = productosVenta;
+        this.comentarios = comentarios;
+        this.compras = compras;
+        this.detalleSubastas = detalleSubastas;
+        this.chats = chats;
+        this.productosFavoritos = productosFavoritos;
+    }
 }

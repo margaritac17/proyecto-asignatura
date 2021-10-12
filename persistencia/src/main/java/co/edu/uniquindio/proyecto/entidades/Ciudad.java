@@ -21,13 +21,16 @@ public class Ciudad implements Serializable {
     private Integer codigo;
 
     @Column(length = 80, nullable=false)
-    private String nombre;
+    private String nombreCiudad;
 
-    @OneToMany
+    @OneToMany(mappedBy = "ciudad")
     private List<Usuario> usuarios;
 
-    public Ciudad(String nombre) {
-        this.nombre = nombre;
+    @OneToMany(mappedBy = "ciudad")
+    private List<Producto> productos;
+
+    public Ciudad(String nombreCiudad) {
+        this.nombreCiudad = nombreCiudad;
     }
 
 }

@@ -1,0 +1,38 @@
+package co.edu.uniquindio.proyecto.entidades;
+
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+public class Compra implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    private Integer codigo;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Usuario usuario;
+
+    @Column(nullable=false)
+    private LocalDate fecha_compra;
+
+    @Column(nullable = false)
+    private String medio_pago;
+
+    @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
+    private List<DetalleCompra> detalleCompras;
+
+
+}

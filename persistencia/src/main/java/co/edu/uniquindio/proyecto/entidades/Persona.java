@@ -6,29 +6,25 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
-@AllArgsConstructor
-@ToString
 public class Persona implements Serializable {
     @Id
-    @Column(length= 18)
     @EqualsAndHashCode.Include
     private String codigo;
 
-    @Column(nullable = false, length= 100)
+    @Column(nullable = false, length= 150)
     private String nombre;
 
-    @Column(nullable = false)
-    private LocalDate fechaNacimiento;
+    @Column(nullable = false, unique=true)
+    private String email;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable=false)
-    private GeneroPersona genero;
-
+    @Column(nullable = false, length= 100)
+    private String password;
 
 }
