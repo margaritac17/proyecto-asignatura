@@ -8,7 +8,7 @@ insert into usuario values ("125", "Juan" , "juan@email.com", "3333", "juan", 1)
 insert into usuario_telefonos values ("123", "718718");
 insert into usuario_telefonos values ("123", "2232");
 
-/*
+
 insert into producto values (1, "Telefono Samsung s21 como nuevo", 0 , "2021/10/30", "Samsung S21", "Samsung S21 x", 4_000_000,3,1,"123");
 insert into producto values (2, "Nintendo Switch nueva sellada", 0 , "2021/10/30", "Nintendo Switch", "Nintendo Switch OLED", 2000000,2,2,"124");
 insert into producto values (3, "Tennis Adidas Originales", 0.05 , "2021/10/30", "Tennis Adidas", "Tennis Adidas originales", 230_000,3,2,"124");
@@ -38,4 +38,7 @@ insert into usuario_productos_favoritos values ("123", 2);
 insert into usuario_productos_favoritos values ("123", 3);
 insert into usuario_productos_favoritos values ("125", 2);
 
+<<<<<<< HEAD
 */
+=======
+>>>>>>> db672c7658ff5c6863ed9432c71587fc37d27a5e
