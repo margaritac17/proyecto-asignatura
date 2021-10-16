@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,5 +35,12 @@ public class DetalleCompra implements Serializable {
     @Column(nullable=false)
     private Double precio_producto;
 
-
+    @Builder
+    public DetalleCompra(Integer codigo, Compra compra, Producto producto, Integer unidades, Double precio_producto) {
+        this.codigo = codigo;
+        this.compra = compra;
+        this.producto = producto;
+        this.unidades = unidades;
+        this.precio_producto = precio_producto;
+    }
 }

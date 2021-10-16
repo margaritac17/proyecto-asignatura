@@ -47,7 +47,7 @@ public class Producto implements Serializable {
 
     @ElementCollection
     @Column(nullable = false)
-    private Map<String,String> imagenes;
+    private List<String> imagenes;
 
     //Codigo vendedor?
     @ManyToOne
