@@ -1,12 +1,10 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -19,18 +17,26 @@ public class Mensaje implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @Column(length= 10000)
+    @Column(length = 10000)
     private String mensaje;
 
-    @Column(length= 200)
+    @Column(length = 200)
     private String emisor;
 
-    @Column(length= 18)
-    private String fecha;
+    @Column(length = 100)
+    private LocalDate fecha;
 
     @ManyToOne
     @JoinColumn(nullable = false)
     private Chat chats;
 
+    @Builder
+    public Mensaje(Integer codigo, String mensaje, String emisor, LocalDate fecha, Chat chats) {
+        this.codigo = codigo;
+        this.mensaje = mensaje;
+        this.emisor = emisor;
+        this.fecha = fecha;
+        this.chats = chats;
+    }
 }
 
