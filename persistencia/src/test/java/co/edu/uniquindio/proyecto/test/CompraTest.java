@@ -25,6 +25,7 @@ public class CompraTest {
     @Autowired
     private UsuarioRepo usuarioRepo;
 
+    //Funcion que permite realizar la prueba unitaria para registrar una compra y valida que no sea null
     @Test
     @Sql("classpath:data.sql")
     public void registrarCompraTest() {
@@ -37,6 +38,7 @@ public class CompraTest {
 
     }
 
+    //Funcion que permite realizar la prueba unitaria para eliminar una compra
     @Test
     @Sql("classpath:data.sql")
     public void eliminarCompraTest(){
@@ -49,6 +51,7 @@ public class CompraTest {
 
     }
 
+    //Funcion que permite realizar una prueba unitaria para actualizar una compra
     @Test
     @Sql("classpath:data.sql")
     public void ActualizarTest(){
@@ -62,6 +65,7 @@ public class CompraTest {
 
     }
 
+    //Funcion que permite realizar la prueba para listar las compras
     @Test
     @Sql("classpath:data.sql")
     public void listarCompraTest(){
