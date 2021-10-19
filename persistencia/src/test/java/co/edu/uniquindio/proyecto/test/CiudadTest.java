@@ -18,6 +18,7 @@ public class CiudadTest {
     @Autowired
     private CiudadRepo ciudadRepo;
 
+    //Funcion que permite realizar la prueba unitaria para registrar una ciudad y se comprueba que no sea null
     @Test
     @Sql("classpath:data.sql")
     public void registrarCiudadTest(){
@@ -27,6 +28,7 @@ public class CiudadTest {
         Assertions.assertNotNull(ciudadGuardada);
     }
 
+    //Funcion que permite realizar la prueba unitaria para eliminar una ciudad y comprobar que se elimino mediante el asserNull
     @Test
     @Sql("classpath:data.sql")
     public void eliminarCiudadTest(){
@@ -39,6 +41,7 @@ public class CiudadTest {
 
     }
 
+    //Funcion que permite realizar la prueba unitaria para actualizar una ciudad
     @Test
     @Sql("classpath:data.sql")
     public void ActualizarCidadTest(){
@@ -51,6 +54,7 @@ public class CiudadTest {
         Assertions.assertEquals("Medellin", ciudadActualizada.getNombreCiudad());
     }
 
+    //Funcion que permite realizar la prueba unitaria para listar las ciudades y validar mediante el tamaño de la lista
     @Test
     @Sql("classpath:data.sql")
     public void listarTest(){

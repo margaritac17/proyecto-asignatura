@@ -1,8 +1,10 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
+import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,6 +30,7 @@ public class UsuarioTest {
     @Autowired
     private CiudadRepo ciudadRepo;
 
+    //Funcion que permite realizar la prueba unitaria para registrar un usuario
     @Test
     @Sql("classpath:data.sql")
     public void registrarTest(){
@@ -39,6 +42,7 @@ public class UsuarioTest {
         Assertions.assertNotNull(usuarioGuardado);
     }
 
+    //Funcion que permite realizar la prueba unitaria para eliminar un usuario
     @Test
     @Sql("classpath:data.sql")
     public void eliminarTest(){
@@ -51,6 +55,7 @@ public class UsuarioTest {
 
     }
 
+    //Funcion que permite realizar la prueba unitaria para actualizar una usuario
     @Test
     @Sql("classpath:data.sql")
     public void ActualizarTest(){
@@ -64,6 +69,7 @@ public class UsuarioTest {
 
     }
 
+    //Funcion que permite realizar la prueba unitaria para validar la cantidad de usuarios mediante el tamaño de la lista
     @Test
     @Sql("classpath:data.sql")
     public void listarTest(){

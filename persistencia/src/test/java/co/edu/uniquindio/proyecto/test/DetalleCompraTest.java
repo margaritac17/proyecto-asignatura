@@ -30,7 +30,7 @@ public class DetalleCompraTest {
     @Autowired
     private ProductoRepo productoRepo;
 
-
+    //Funcion que permite realizar la prueba unitaria para registrar un detalleCompra
     @Test
     @Sql("classpath:data.sql")
     public void registrarDetalleCompraTest() {
@@ -44,6 +44,7 @@ public class DetalleCompraTest {
 
     }
 
+    //Funcion que permite realizar la prueba unitaria para eliminar un detalleCompra
     @Test
     @Sql("classpath:data.sql")
     public void eliminarDetalleCompraTest(){
@@ -56,6 +57,7 @@ public class DetalleCompraTest {
 
     }
 
+    //Funcion que permite realizar la prueba unitaria para actualizar un detalleCompra
     @Test
     @Sql("classpath:data.sql")
     public void ActualizarDetalleCompraTest(){
@@ -68,6 +70,7 @@ public class DetalleCompraTest {
         Assertions.assertEquals(10, detalleCompraActualizada.getUnidades());
     }
 
+    //Funcion que permite realizar la prueba para listar los detalleCompra creados
     @Test
     @Sql("classpath:data.sql")
     public void listarDetalleCompraTest(){
