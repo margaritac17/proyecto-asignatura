@@ -47,3 +47,17 @@ insert into chat values(3, 3, "125");
 insert into mensaje values(1,"Sebastian", "2021/09/05 20:12:05", "hola este es mi msje", 1);
 insert into mensaje values(2,"Dario", "2021/09/05 20:12:05", "hola este es mi msje", 1);
 insert into mensaje values(3,"Maria", "2021/09/05 20:12:05", "hola este es mi msje", 1);
+
+
+insert into subasta values (1, "2021/09/05 20:12:05", 1);
+insert into subasta values (2, "2021/09/05 20:12:05", 2);
+insert into subasta values (3, "2021/09/05 20:12:05", 3);
+/*
+// insertar datos en detalle subasta
+insert into detalle_subasta values(1, "2021/10/18 20:12:05", 40000,1,"125");
+insert into detalle_subasta values(2, "2021/10/18 20:12:05", 60000,2,"123");
+insert into detalle_subasta values(3, "2021/10/18 20:12:05", 80000,3,"124");
+
+
+
+*/

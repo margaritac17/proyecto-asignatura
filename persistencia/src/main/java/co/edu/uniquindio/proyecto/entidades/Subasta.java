@@ -31,5 +31,10 @@ public class Subasta implements Serializable {
     @ToString.Exclude
     private List<DetalleSubasta> detalleSubastas;
 
-
+    @Builder
+    public Subasta(Integer codigo, LocalDate fecha_limite, Producto producto) {
+        this.codigo = codigo;
+        this.fecha_limite = fecha_limite;
+        this.producto = producto;
+    }
 }

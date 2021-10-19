@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -35,5 +32,12 @@ public class DetalleSubasta implements Serializable {
     @Column(nullable=false)
     private LocalDate fecha_subasta;
 
-
+    @Builder
+    public DetalleSubasta(Integer codigo, Subasta subasta, Usuario usuario, Double valor, LocalDate fecha_subasta) {
+        this.codigo = codigo;
+        this.subasta = subasta;
+        this.usuario = usuario;
+        this.valor = valor;
+        this.fecha_subasta = fecha_subasta;
+    }
 }
