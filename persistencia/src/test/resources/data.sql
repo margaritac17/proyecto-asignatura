@@ -39,3 +39,11 @@ insert into comentario values (2, 5, "2021/10/07 13:29:48", "Excelente celular, 
 insert into usuario_productos_favoritos values ("123", 2);
 insert into usuario_productos_favoritos values ("123", 3);
 insert into usuario_productos_favoritos values ("125", 2);
+
+insert into chat values(1, 2, "123");
+insert into chat values(2, 1, "124");
+insert into chat values(3, 3, "125");
+
+insert into mensaje values(1,"Sebastian", "2021/09/05 20:12:05", "hola este es mi msje", 1);
+insert into mensaje values(2,"Dario", "2021/09/05 20:12:05", "hola este es mi msje", 1);
+insert into mensaje values(3,"Maria", "2021/09/05 20:12:05", "hola este es mi msje", 1);
