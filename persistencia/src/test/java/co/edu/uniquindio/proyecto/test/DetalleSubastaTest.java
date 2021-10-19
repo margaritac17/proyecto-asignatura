@@ -2,7 +2,6 @@ package co.edu.uniquindio.proyecto.test;
 
 
 import co.edu.uniquindio.proyecto.entidades.DetalleSubasta;
-import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Subasta;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.DetalleSubastaRepo;
@@ -21,7 +20,7 @@ import java.util.List;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class DetalleSubastaTest {
-
+    
     @Autowired
     private DetalleSubastaRepo detalleSubastaRepo;
 

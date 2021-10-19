@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class DetalleSubasta implements Serializable {
 
+    //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -32,6 +33,8 @@ public class DetalleSubasta implements Serializable {
     @Column(nullable=false)
     private LocalDate fecha_subasta;
 
+
+    //constructor de la clase
     @Builder
     public DetalleSubasta(Integer codigo, Subasta subasta, Usuario usuario, Double valor, LocalDate fecha_subasta) {
         this.codigo = codigo;
