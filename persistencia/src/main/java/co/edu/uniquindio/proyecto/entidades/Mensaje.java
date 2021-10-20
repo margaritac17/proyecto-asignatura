@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class Mensaje implements Serializable {
+    //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +31,7 @@ public class Mensaje implements Serializable {
     @JoinColumn(nullable = false)
     private Chat chats;
 
+    //Constructor de la clase
     @Builder
     public Mensaje(Integer codigo, String mensaje, String emisor, LocalDate fecha, Chat chats) {
         this.codigo = codigo;

@@ -14,6 +14,8 @@ import java.time.LocalDate;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
 public class Persona implements Serializable {
+    //Declaracion  de atributos  de la clase Personba con su respectiva  parametrizacion
+
     @Id
     @EqualsAndHashCode.Include
     private String codigo;

@@ -9,6 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
+    //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
 
     @ElementCollection
     private List<String> telefonos;
@@ -44,6 +45,7 @@ public class Usuario extends Persona implements Serializable {
     @ManyToMany
     private List<Producto> productosFavoritos;
 
+    //Constructor
     @Builder
     public Usuario(String codigo, String nombre, String email, String password, String username, Ciudad ciudad) {
         super(codigo, nombre, email, password);

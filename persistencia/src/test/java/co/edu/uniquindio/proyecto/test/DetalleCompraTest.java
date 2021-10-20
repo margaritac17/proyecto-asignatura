@@ -3,7 +3,6 @@ package co.edu.uniquindio.proyecto.test;
 import co.edu.uniquindio.proyecto.entidades.Compra;
 import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
 import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
@@ -13,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @DataJpaTest
@@ -77,6 +74,5 @@ public class DetalleCompraTest {
         List<DetalleCompra> lista = detalleCompraRepo.findAll();
         Assertions.assertEquals(3, lista.size());
     }
-
 
 }

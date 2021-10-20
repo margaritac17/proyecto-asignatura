@@ -4,6 +4,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
 @NoArgsConstructor
 @ToString
 public class Producto implements Serializable {
+    //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +37,7 @@ public class Producto implements Serializable {
     private Integer unidades;
 
     @Column(nullable=false)
-    private LocalDateTime fecha_limite;
+    private LocalDate fecha_limite;
 
     @Column(nullable = false)
     private Float precio;
@@ -79,8 +81,8 @@ public class Producto implements Serializable {
     @ToString.Exclude
     private List<Usuario> favoritos;
 
-
-    public Producto(Integer codigo, String nombre, String nombrePublicacion, String descripcion, Integer unidades, LocalDateTime fecha_limite, Float precio, Float descuento, Usuario vendedor, Ciudad ciudad) {
+    @Builder
+    public Producto(Integer codigo, String nombre, String nombrePublicacion, String descripcion, Integer unidades, LocalDate fecha_limite, Float precio, Float descuento, Usuario vendedor, Ciudad ciudad) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.nombrePublicacion = nombrePublicacion;

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Comentario implements Serializable {
+    //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +39,15 @@ public class Comentario implements Serializable {
     private LocalDateTime fecha;
 
     private Integer calificacion;
+
+    @Builder
+    public Comentario(Integer codigo, Producto producto, Usuario usuario, String mensaje, String respuesta, LocalDateTime fecha, Integer calificacion) {
+        this.codigo = codigo;
+        this.producto = producto;
+        this.usuario = usuario;
+        this.mensaje = mensaje;
+        this.respuesta = respuesta;
+        this.fecha = fecha;
+        this.calificacion = calificacion;
+    }
 }

@@ -14,6 +14,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Compra implements Serializable {
+    //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

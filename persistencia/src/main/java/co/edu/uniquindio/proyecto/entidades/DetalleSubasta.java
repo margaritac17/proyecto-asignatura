@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -16,6 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class DetalleSubasta implements Serializable {
 
+    //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -36,4 +34,13 @@ public class DetalleSubasta implements Serializable {
     private LocalDate fecha_subasta;
 
 
+    //constructor de la clase
+    @Builder
+    public DetalleSubasta(Integer codigo, Subasta subasta, Usuario usuario, Double valor, LocalDate fecha_subasta) {
+        this.codigo = codigo;
+        this.subasta = subasta;
+        this.usuario = usuario;
+        this.valor = valor;
+        this.fecha_subasta = fecha_subasta;
+    }
 }

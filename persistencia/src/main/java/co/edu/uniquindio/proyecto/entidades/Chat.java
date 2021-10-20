@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class Chat implements Serializable {
+    //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +32,8 @@ public class Chat implements Serializable {
     @ToString.Exclude
     private List<Mensaje> mensajes;
 
+
+    //Constructor de la clase Chat
     @Builder
     public Chat(Integer codigo, Usuario usuario, Producto producto) {
         this.codigo = codigo;

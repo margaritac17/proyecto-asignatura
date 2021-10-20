@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class Ciudad implements Serializable {
+    //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

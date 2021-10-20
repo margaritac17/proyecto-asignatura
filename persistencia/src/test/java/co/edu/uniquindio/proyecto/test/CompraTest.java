@@ -54,7 +54,7 @@ public class CompraTest {
     //Funcion que permite realizar una prueba unitaria para actualizar una compra
     @Test
     @Sql("classpath:data.sql")
-    public void ActualizarTest(){
+    public void ActualizarCompraTest(){
 
         Compra compra = compraRepo.findById(1).orElse(null);
         compra.setMedio_pago("Efectivo");

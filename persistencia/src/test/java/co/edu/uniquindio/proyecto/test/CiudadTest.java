@@ -28,7 +28,7 @@ public class CiudadTest {
         Assertions.assertNotNull(ciudadGuardada);
     }
 
-    //Funcion que permite realizar la prueba unitaria para eliminar una ciudad y comprobar que se elimino mediante el asserNull
+    //Funcion que permite realizar la prueba unitaria para eliminar una ciudad y comprobar que se elimino mediante el assertNull
     @Test
     @Sql("classpath:data.sql")
     public void eliminarCiudadTest(){
@@ -57,7 +57,7 @@ public class CiudadTest {
     //Funcion que permite realizar la prueba unitaria para listar las ciudades y validar mediante el tamaño de la lista
     @Test
     @Sql("classpath:data.sql")
-    public void listarTest(){
+    public void listarCiudadTest(){
         List<Ciudad> lista = ciudadRepo.findAll();
         Assertions.assertEquals(3, lista.size());
     }
