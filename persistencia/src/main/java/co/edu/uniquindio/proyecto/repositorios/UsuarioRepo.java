@@ -14,6 +14,8 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
+    //Permite realizar algunas consultas para obtener diferentes datos de la tabla usuario
+
     List<Usuario> findByNombreContains(String nombre);
 
     Optional<Usuario> findByEmail(String email);

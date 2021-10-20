@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ComentarioRepo extends JpaRepository<Comentario,Integer> {
-
+    //Consultas de prueba para seleccionar los comentarios en un rango
     @Query("select c from Comentario c where c.calificacion > :calificacionMenor and  c.calificacion < :calificacionMayor")
     List<Comentario> listarComentarioRango1(int calificacionMenor, int calificacionMayor);
 

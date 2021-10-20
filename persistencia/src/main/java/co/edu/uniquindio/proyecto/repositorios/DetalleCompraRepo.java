@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface DetalleCompraRepo extends JpaRepository<DetalleCompra,Integer> {
 
+    //Me permite obtener un producto que este asociado al detalle compra
     List<DetalleCompra> findByProducto(Producto producto);
 
 }
