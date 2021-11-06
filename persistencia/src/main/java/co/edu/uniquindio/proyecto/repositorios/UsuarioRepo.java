@@ -22,6 +22,8 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
     Optional<Usuario> findByEmailAndPassword(String email, String clave);
 
+    Optional<Usuario> findByUsername(String username);
+
     Page<Usuario> findAll(Pageable paginador);
 
     @Query("select p from Usuario u, IN (u.productosFavoritos) p where u.email= :email")
