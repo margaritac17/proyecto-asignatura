@@ -1,13 +1,14 @@
 package co.edu.uniquindio.proyecto.servicio;
 
-import co.edu.uniquindio.proyecto.entidades.Categoria;
-import co.edu.uniquindio.proyecto.entidades.Compra;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,11 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo) {
+    private final ComentarioRepo comentarioRepo;
+
+    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo comentarioRepo) {
         this.productoRepo = productoRepo;
+        this.comentarioRepo= comentarioRepo;
     }
 
     @Override
@@ -52,12 +56,18 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<Producto> listarProductos(Categoria categoria) {
-        return null;
+        return productoRepo.listarPorCategoria(categoria);
     }
 
     @Override
-    public void comentarProducto(String mensaje, Integer calificacion, Usuario usuario, Producto producto) throws Exception {
+    public List<Producto> listarTodosProductos() {
+        return productoRepo.findAll();
+    }
 
+    @Override
+    public void comentarProducto(Comentario comentario) throws Exception {
+        comentario.setFecha(LocalDateTime.now());
+        comentarioRepo.save(comentario);
     }
 
     @Override
@@ -76,12 +86,22 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<Producto> buscarProducto(String nombre, String[] filtros) {
-        return null;
+    public List<Producto> buscarProducto(String nombreProducto, String[] filtros) {
+        return productoRepo.buscarProductoNombre(nombreProducto);
     }
 
     @Override
     public List<Producto> listarProductos(String codigoUsuario) throws Exception {
         return null;
+    }
+
+    @Override
+    public List<Categoria> listarCategorias() {
+        return Arrays.asList(Categoria.values());
+    }
+
+    @Override
+    public Categoria obtenerCategoria(String categoria) throws Exception {
+        return Categoria.valueOf(categoria);
     }
 }

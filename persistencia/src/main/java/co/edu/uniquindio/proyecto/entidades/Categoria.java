@@ -7,5 +7,7 @@ public enum Categoria {
     HOGAR,
     BELLEZA,
     CONTRUCCION,
-    MODA
+    MODA,
+    AUTOS,
+    LIMPIEZA
 }

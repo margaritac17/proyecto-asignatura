@@ -17,8 +17,10 @@ public interface ProductoServicio {
 
     List<Producto> listarProductos(Categoria categoria);
 
-   // void comentarProducto(Comentario comentario);
-    void comentarProducto(String mensaje, Integer calificacion, Usuario usuario, Producto producto) throws Exception;
+    List<Producto> listarTodosProductos();
+
+     void comentarProducto(Comentario comentario) throws Exception;
+    //void comentarProducto(String mensaje, Integer calificacion, Usuario usuario, Producto producto) throws Exception;
 
     void guardarProductoFavorito(Producto producto, Usuario usuario) throws Exception;
 
@@ -30,6 +32,7 @@ public interface ProductoServicio {
 
     List<Producto> listarProductos(String codigoUsuario) throws Exception;
 
+    List<Categoria> listarCategorias();
 
-
+    Categoria obtenerCategoria(String categoria) throws Exception;
 }

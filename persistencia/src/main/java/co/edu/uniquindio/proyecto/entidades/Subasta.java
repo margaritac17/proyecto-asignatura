@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Subasta implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
+    @Future(message = "La fecha debe estar definida en el futuro")
     private LocalDate fecha_limite;
 
     @ManyToOne

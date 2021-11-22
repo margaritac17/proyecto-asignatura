@@ -1,11 +1,11 @@
 package co.edu.uniquindio.proyecto.bean;
 
-import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.servicio.ProductoServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +15,14 @@ import java.util.List;
 
 @Component
 @ViewScoped
-public class InicioBeam implements Serializable {
+public class BusquedaBean implements Serializable {
+
+    @Getter @Setter
+    private String busqueda;
+
+    @Getter @Setter
+    @Value("#{param['busqueda']}")
+    private String busquedaParam;
 
     @Getter @Setter
     private List<Producto> productos;
@@ -24,12 +31,13 @@ public class InicioBeam implements Serializable {
     private ProductoServicio productoServicio;
 
     @PostConstruct
-    public void inicializar(){
-        this.productos=productoServicio.listarTodosProductos();
+    public void  inicializar(){
+        if(busquedaParam!=null && !busquedaParam.isEmpty()){
+            productos= productoServicio.buscarProducto(busquedaParam, null);
+        }
     }
+    public String buscar(){
+        return "resultado_busqueda?faces-redirect=true&amp;busqueda="+busqueda;
 
-    public String irADetalle(String id){
-        return "detalle_producto?faces-redirect=true&amp;producto="+id;
     }
 }
-

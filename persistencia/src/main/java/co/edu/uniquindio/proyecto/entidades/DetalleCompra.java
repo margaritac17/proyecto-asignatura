@@ -31,9 +31,11 @@ public class DetalleCompra implements Serializable {
 
     @Positive
     @Column( nullable=false)
+    @Positive
     private Integer unidades;
 
     @Column(nullable=false)
+    @Positive
     private Double precio_producto;
 
     @Builder
