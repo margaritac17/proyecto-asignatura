@@ -29,7 +29,7 @@ public class ProductoTest {
 
     @Autowired
     private ProductoRepo productoRepo;
-
+/*
     //Funcion que permite realizar la prueba unitaria para registrar un producto y valida que no sea null
     @Test
     @Sql("classpath:data.sql")
@@ -37,11 +37,11 @@ public class ProductoTest {
 
         Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
         Usuario usuario =usuarioRepo.findById("123").orElse(null);
-/*
+
         Producto producto = Producto.builder().codigo(1).descripcion("Telefono Samsung s21 como nuevo").descuento(0f).fecha_limite(LocalDate.of(2021,11,21)).nombre("Samsung S21").nombrePublicacion("Samsung S21 x").precio(4000000f).unidades(3).vendedor(usuario).ciudad(ciudad).build();
         Producto productoGuardado= productoRepo.save(producto);
         Assertions.assertNotNull(productoGuardado);
-  */
+
     }
 
     //Funcion que permite realizar la prueba unitaria para eliminar un producto
@@ -78,4 +78,13 @@ public class ProductoTest {
         List<Producto> lista = productoRepo.findAll();
         Assertions.assertEquals(3, lista.size());
     }
+*/
+    @Test
+    @Sql("classpath:data.sql")
+    public void promedioCalificacionTest(){
+      Integer cal= productoRepo.calificacionPromedio(1);
+        Assertions.assertEquals(2, cal);
+    }
+
+
 }

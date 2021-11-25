@@ -7,52 +7,50 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Crear un nuevo usuario</title>
-</h:head>
-<h:body>
-    <p:panel header="Registrar usuario">
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="tittle">Registrarse</ui:define>
+    <ui:define name="content">
+        <p:panel header="Registrar usuario">
 
-        <h:form >
-            <h:panelGrid columns="3" cellpadding="5">
+            <h:form >
+                <h:panelGrid columns="3" cellpadding="5">
 
-                <p:outputLabel for="codigo_u" value="Codigo:" />
-                <p:inputText id="codigo_u" value="#{usuarioBeam.usuario.codigo}" required="true"/>
-                <p:message for="codigo_u"/>
+                    <p:outputLabel for="codigo_u" value="Codigo:" />
+                    <p:inputText id="codigo_u" value="#{usuarioBeam.usuario.codigo}" required="true"/>
+                    <p:message for="codigo_u"/>
 
-                <p:outputLabel for="nombre_u" value="Nombre:" />
-                <p:inputText id="nombre_u" value="#{usuarioBeam.usuario.nombre}" required="true"/>
-                <p:message for="nombre_u"/>
+                    <p:outputLabel for="nombre_u" value="Nombre:" />
+                    <p:inputText id="nombre_u" value="#{usuarioBeam.usuario.nombre}" required="true"/>
+                    <p:message for="nombre_u"/>
 
-                <p:outputLabel for="email_u" value="Email:" />
-                <p:inputText id="email_u" value="#{usuarioBeam.usuario.email}" required="true"/>
-                <p:message for="email_u"/>
+                    <p:outputLabel for="email_u" value="Email:" />
+                    <p:inputText id="email_u" value="#{usuarioBeam.usuario.email}" required="true"/>
+                    <p:message for="email_u"/>
 
-                <p:outputLabel for="nick_u" value="Nickname:" />
-                <p:inputText id="nick_u" value="#{usuarioBeam.usuario.username}" required="true"/>
-                <p:message for="nick_u"/>
+                    <p:outputLabel for="nick_u" value="Nickname:" />
+                    <p:inputText id="nick_u" value="#{usuarioBeam.usuario.username}" required="true"/>
+                    <p:message for="nick_u"/>
 
-                <p:outputLabel value="Ciudad:" for="ciudad_u" />
-                <p:selectOneMenu id="ciudad_u" value="#{usuarioBeam.usuario.ciudad}"  converter="#{ciudadConverter}"  >
-                   <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
-                   <f:selectItems value="#{usuarioBeam.ciudades}" var="ciudad" itemLabel="#{ciudad.nombreCiudad}" />
-                </p:selectOneMenu>
-                <p:message for="ciudad_u"/>
+                    <p:outputLabel value="Ciudad:" for="ciudad_u" />
+                    <p:selectOneMenu id="ciudad_u" value="#{usuarioBeam.usuario.ciudad}"  converter="#{ciudadConverter}"  >
+                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                        <f:selectItems value="#{usuarioBeam.ciudades}" var="ciudad" itemLabel="#{ciudad.nombreCiudad}" />
+                    </p:selectOneMenu>
+                    <p:message for="ciudad_u"/>
 
-                <p:outputLabel for="pass_u" value="Contraseña:" />
-                <p:password id="pass_u" value="#{usuarioBeam.usuario.password}" required="true"/>
-                <p:message for="pass_u"/>
+                    <p:outputLabel for="pass_u" value="Contraseña:" />
+                    <p:password id="pass_u" value="#{usuarioBeam.usuario.password}" required="true"/>
+                    <p:message for="pass_u"/>
 
 
-            </h:panelGrid>
+                </h:panelGrid>
 
-            <p:growl ShowDetail="true" for="msj-bean" />
+                <p:growl ShowDetail="true" for="msj-bean" />
 
 
-            <p:commandButton action="#{usuarioBeam.registrarUsuario}" value="Registrar Usuario"   update="@form" icon="pi pi-user-plus"/>
-        </h:form>
-    </p:panel>
-</h:body>
+                <p:commandButton action="#{usuarioBeam.registrarUsuario}" value="Registrar Usuario"   update="@form" icon="pi pi-user-plus"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
 </html>

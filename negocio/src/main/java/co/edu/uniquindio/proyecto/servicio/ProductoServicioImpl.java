@@ -104,4 +104,9 @@ public class ProductoServicioImpl implements ProductoServicio {
     public Categoria obtenerCategoria(String categoria) throws Exception {
         return Categoria.valueOf(categoria);
     }
+
+    @Override
+    public Integer calificacionPromedio(Integer codigoProducto) {
+        return productoRepo.calificacionPromedio(codigoProducto);
+    }
 }

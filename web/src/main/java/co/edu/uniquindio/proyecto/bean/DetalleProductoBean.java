@@ -36,6 +36,10 @@ public class DetalleProductoBean implements Serializable {
     private Comentario nuevoComentario;
 
     @Getter @Setter
+    private Integer calificacionPromedio;
+
+
+    @Getter @Setter
     private List<Comentario> comentarios;
 
     @PostConstruct
@@ -43,9 +47,11 @@ public class DetalleProductoBean implements Serializable {
         nuevoComentario= new Comentario();
         if(codigoProducto!=null && !codigoProducto.isEmpty()){
             Integer codigo= Integer.parseInt(codigoProducto);
+            this.calificacionPromedio= productoServicio.calificacionPromedio(codigo);
             try {
                 producto= productoServicio.obtenerProducto(codigo);
                 this.comentarios= producto.getComentarios();
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }
