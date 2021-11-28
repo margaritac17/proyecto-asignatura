@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Producto;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicio.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicio.UsuarioServicio;
 import lombok.Getter;
@@ -38,6 +39,8 @@ public class DetalleProductoBean implements Serializable {
     @Getter @Setter
     private Integer calificacionPromedio;
 
+    @Value("#{seguridadBean.usuarioSesion}")
+    private Usuario usuarioSesion;
 
     @Getter @Setter
     private List<Comentario> comentarios;
@@ -61,8 +64,9 @@ public class DetalleProductoBean implements Serializable {
     public void crearComentario(){
         try {
             nuevoComentario.setProducto(producto);
-            nuevoComentario.setUsuario(usuarioServicio.obtenerUsuario("123"));
+            nuevoComentario.setUsuario(usuarioSesion);
             productoServicio.comentarProducto(nuevoComentario);
+
             this.comentarios.add(nuevoComentario);
             nuevoComentario= new Comentario();
         } catch (Exception e) {

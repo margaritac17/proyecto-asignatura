@@ -13,6 +13,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @DataJpaTest
@@ -31,7 +33,7 @@ public class CompraTest {
     public void registrarCompraTest() {
 
         Usuario usuario = usuarioRepo.findById("125").orElse(null);
-        Compra compra= Compra.builder().codigo(1).usuario(usuario).fecha_compra(LocalDate.of(2011,10,15)).medio_pago("Tarjeta de credito").build();
+        Compra compra= Compra.builder().codigo(1).usuario(usuario).fecha_compra(LocalDateTime.now(ZoneId.of("America/Bogota"))).medio_pago("Tarjeta de credito").build();
 
         Compra compraGuardada = compraRepo.save(compra);
         Assertions.assertNotNull(compraGuardada);

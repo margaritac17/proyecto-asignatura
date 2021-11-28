@@ -51,6 +51,9 @@ public class ProductoBean implements Serializable {
     @Getter @Setter
     private List<Categoria> categorias;
 
+    @Value("#{seguridadBean.usuarioSesion}")
+    private  Usuario usuarioSesion;
+
     @PostConstruct
     public void inicializar(){
 
@@ -62,23 +65,22 @@ public class ProductoBean implements Serializable {
 
     public void crearProducto(){
         try {
-            //Estoy quemando el usuario vendedor de producto(se debe quitar mas adelatne)
-            if(!imagenes.isEmpty()){
-                Usuario usuario= usuarioServicio.obtenerUsuario("123");
-                producto.setVendedor(usuario);
-                producto.setImagenes(imagenes);
-                producto.setFecha_limite(LocalDateTime.now().plusMonths(2));
-                productoServicio.publicarProducto(producto);
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El producto se creó correctamente");
-                FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
-            } else {
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta", "Es necesario subir al menos una imagen");
-                FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
+            if(usuarioSesion!=null){
+                if(!imagenes.isEmpty()){
+                    producto.setVendedor(usuarioSesion);
+                    producto.setImagenes(imagenes);
+                    producto.setFecha_limite(LocalDateTime.now().plusMonths(2));
+                    productoServicio.publicarProducto(producto);
+                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El producto se creó correctamente");
+                    FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
+                } else {
+                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta", "Es necesario subir al menos una imagen");
+                    FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
+                }
             }
         }catch (Exception e){
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("msj-bean", fm);
-
         }
     }
 

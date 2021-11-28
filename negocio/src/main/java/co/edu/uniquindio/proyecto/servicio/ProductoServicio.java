@@ -1,7 +1,9 @@
 package co.edu.uniquindio.proyecto.servicio;
 
+import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductoServicio {
@@ -37,4 +39,7 @@ public interface ProductoServicio {
     Categoria obtenerCategoria(String categoria) throws Exception;
 
     Integer calificacionPromedio(Integer codigoProducto);
+
+    Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioPago) throws Exception;
+
 }

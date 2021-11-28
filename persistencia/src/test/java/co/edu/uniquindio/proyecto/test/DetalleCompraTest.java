@@ -35,7 +35,7 @@ public class DetalleCompraTest {
         Compra compra = compraRepo.findById(1).orElse(null);
         Producto producto = productoRepo.findById(1).orElse(null);
 
-        DetalleCompra detalleCompra= DetalleCompra.builder().codigo(1).compra(compra).producto(producto).unidades(5).precio_producto(3.000000).build();
+        DetalleCompra detalleCompra= DetalleCompra.builder().codigo(1).compra(compra).producto(producto).unidades(5).precio_producto(3.000000F).build();
         DetalleCompra detalleCompraGuardada = detalleCompraRepo.save(detalleCompra);
         Assertions.assertNotNull(detalleCompraGuardada);
 

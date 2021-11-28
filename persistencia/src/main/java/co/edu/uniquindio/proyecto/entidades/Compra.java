@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,7 @@ public class Compra implements Serializable {
     private Usuario usuario;
 
     @Column(nullable=false)
-    private LocalDate fecha_compra;
+    private LocalDateTime fecha_compra;
 
     @Column(nullable = false)
     private String medio_pago;
@@ -36,7 +37,7 @@ public class Compra implements Serializable {
     private List<DetalleCompra> detalleCompras;
 
     @Builder
-    public Compra(Integer codigo, Usuario usuario, LocalDate fecha_compra, String medio_pago) {
+    public Compra(Integer codigo, Usuario usuario, LocalDateTime fecha_compra, String medio_pago) {
         this.codigo = codigo;
         this.usuario = usuario;
         this.fecha_compra = fecha_compra;

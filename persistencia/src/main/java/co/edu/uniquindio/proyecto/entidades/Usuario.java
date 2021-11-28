@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,7 @@ public class Usuario extends Persona implements Serializable {
     //Declaracion  de atributos  de la clase con su respectiva  parametrizacion
 
     @ElementCollection
+    @ToString.Exclude
     private List<String> telefonos;
 
     @Column(nullable = false, unique=true)
@@ -48,6 +50,7 @@ public class Usuario extends Persona implements Serializable {
     private List<Chat> chats;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Producto> productosFavoritos;
 
     @Builder

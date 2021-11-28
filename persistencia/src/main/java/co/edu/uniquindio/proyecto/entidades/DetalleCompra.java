@@ -36,10 +36,10 @@ public class DetalleCompra implements Serializable {
 
     @Column(nullable=false)
     @Positive
-    private Double precio_producto;
+    private Float precio_producto;
 
     @Builder
-    public DetalleCompra(Integer codigo, Compra compra, Producto producto, Integer unidades, Double precio_producto) {
+    public DetalleCompra(Integer codigo, Compra compra, Producto producto, Integer unidades, Float precio_producto) {
         this.codigo = codigo;
         this.compra = compra;
         this.producto = producto;
