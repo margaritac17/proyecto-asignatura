@@ -37,6 +37,9 @@ public class DetalleProductoBean implements Serializable {
     private Comentario nuevoComentario;
 
     @Getter @Setter
+    private Comentario respuestaComentario;
+
+    @Getter @Setter
     private Integer calificacionPromedio;
 
     @Value("#{seguridadBean.usuarioSesion}")
@@ -45,16 +48,18 @@ public class DetalleProductoBean implements Serializable {
     @Getter @Setter
     private List<Comentario> comentarios;
 
+
     @PostConstruct
     public void inicializar(){
         nuevoComentario= new Comentario();
+        respuestaComentario= new Comentario();
         if(codigoProducto!=null && !codigoProducto.isEmpty()){
             Integer codigo= Integer.parseInt(codigoProducto);
             this.calificacionPromedio= productoServicio.calificacionPromedio(codigo);
             try {
                 producto= productoServicio.obtenerProducto(codigo);
                 this.comentarios= producto.getComentarios();
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -68,6 +73,18 @@ public class DetalleProductoBean implements Serializable {
             productoServicio.comentarProducto(nuevoComentario);
 
             this.comentarios.add(nuevoComentario);
+            nuevoComentario= new Comentario();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    public void crearRespuesta(){
+        try {
+            respuestaComentario.setProducto(producto);
+            respuestaComentario.setUsuario(usuarioSesion);
+            this.comentarios.add(respuestaComentario);
             nuevoComentario= new Comentario();
         } catch (Exception e) {
 

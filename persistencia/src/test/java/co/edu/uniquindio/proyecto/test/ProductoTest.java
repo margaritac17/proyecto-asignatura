@@ -86,5 +86,13 @@ public class ProductoTest {
         Assertions.assertEquals(2, cal);
     }
 
+    @Test
+    @Sql("classpath:data.sql")
+    public void listaProductosUsuario(){
+        List<Producto> lista= productoRepo.listaProductosUsuario("123");
+        lista.forEach(System.out::println);
+
+    }
+
 
 }

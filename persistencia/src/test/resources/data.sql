@@ -1,4 +1,6 @@
+/*
 --insertar datos prueba bd ciudad
+
 insert into ciudad values (1, "Armenia");
 insert into ciudad values (2, "Pereira");
 insert into ciudad values (3, "Cali");
@@ -70,3 +72,4 @@ insert into detalle_subasta values(2, "2021/09/05 20:12:05", 60000,2,"124");
 insert into detalle_subasta values(3, "2021/09/05 20:12:05", 80000,3,"125");
 
 
+*/

@@ -32,7 +32,7 @@ public interface ProductoServicio {
 
     List<Producto> buscarProducto(String nombre, String[] filtros);
 
-    List<Producto> listarProductos(String codigoUsuario) throws Exception;
+    List<Producto> listarProductos(Usuario usuario) throws Exception;
 
     List<Categoria> listarCategorias();
 
@@ -41,5 +41,6 @@ public interface ProductoServicio {
     Integer calificacionPromedio(Integer codigoProducto);
 
     Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioPago) throws Exception;
+
 
 }

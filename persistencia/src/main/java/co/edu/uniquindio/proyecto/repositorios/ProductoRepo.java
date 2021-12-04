@@ -27,4 +27,7 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     @Query("select avg(co.calificacion) as promedioCalificaciones from Producto p  join p.comentarios co  where p.codigo= :codigoProducto")
     Integer calificacionPromedio(Integer codigoProducto);
 
+    @Query("select p from Producto p where p.vendedor.codigo = :codigoUsuario")
+    List<Producto> listaProductosUsuario(String codigoUsuario);
+
 }

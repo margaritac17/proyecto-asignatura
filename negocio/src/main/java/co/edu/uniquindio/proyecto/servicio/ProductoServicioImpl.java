@@ -94,10 +94,6 @@ public class ProductoServicioImpl implements ProductoServicio {
         return productoRepo.buscarProductoNombre(nombreProducto);
     }
 
-    @Override
-    public List<Producto> listarProductos(String codigoUsuario) throws Exception {
-        return null;
-    }
 
     @Override
     public List<Categoria> listarCategorias() {
@@ -137,5 +133,12 @@ public class ProductoServicioImpl implements ProductoServicio {
        }catch (Exception e){
            throw new Exception(e.getMessage());
        }
+    }
+
+
+    @Override
+    public List<Producto> listarProductos(Usuario usuario) throws Exception {
+        System.out.println(usuario.getCodigo());
+        return productoRepo.listaProductosUsuario(usuario.getCodigo());
     }
 }

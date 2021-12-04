@@ -1,7 +1,12 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
+import co.edu.uniquindio.proyecto.entidades.Compra;
+import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.servicio.CompraServicio;
+import co.edu.uniquindio.proyecto.servicio.DetalleCompraServicio;
 import co.edu.uniquindio.proyecto.servicio.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicio.UsuarioServicio;
 import lombok.Getter;
@@ -15,6 +20,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 @Scope("session")
 @Component
@@ -35,22 +41,48 @@ public class SeguridadBean implements Serializable {
     @Autowired
     private ProductoServicio productoServicio;
 
+    @Autowired
+    private CompraServicio compraServicio;
+
+    @Getter @Setter
+    private Integer codigoCompra;
+
+    @Autowired
+    private DetalleCompraServicio detalleCompraServicio;
+
     @Getter @Setter
     private ArrayList<ProductoCarrito> productosCarrito;
 
     @Getter @Setter
+    private ArrayList<Producto> misProductos;
+
+    @Getter @Setter
+    private ArrayList<Compra> misCompras;
+
+    @Getter @Setter
+    private List<DetalleCompra> misDetallesCompra;
+
+
+    @Getter @Setter
     private Float subtotal;
+
+    @Getter @Setter
+    private Float total;
 
     @PostConstruct
     public void inicializar(){
         this.subtotal= 0F;
+        this.codigoCompra=0;
         this.productosCarrito= new ArrayList<>();
+        this.misProductos= new ArrayList<>();
+        this.misCompras= new ArrayList<>();
+        this.misDetallesCompra= new ArrayList<>();
     }
 
     public String  iniciarSesion(){
         if(!email.isEmpty() && !password.isEmpty()){
             try {
-                usuarioSesion= usuarioServicio.iniciarSesion(email, password);
+                this.usuarioSesion= usuarioServicio.iniciarSesion(email, password);
                 autenticado=true;
                 return "/index?faces-redirect=true";
             } catch (Exception e) {
@@ -70,6 +102,7 @@ public class SeguridadBean implements Serializable {
         ProductoCarrito pc= new ProductoCarrito(id, nombre, imagen, precio, 1);
 
         if(!productosCarrito.contains(pc)){
+
             productosCarrito.add(pc);
             subtotal+=precio;
             FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto agregado al carrito");
@@ -90,6 +123,13 @@ public class SeguridadBean implements Serializable {
         }
     }
 
+    public void calculartotal(){
+        total= 0F;
+        for(DetalleCompra dc:misDetallesCompra){
+            total+=dc.getPrecio_producto()*dc.getUnidades();
+        }
+    }
+
     public void comprar(){
         if(usuarioSesion!=null && !productosCarrito.isEmpty()){
             try {
@@ -106,11 +146,46 @@ public class SeguridadBean implements Serializable {
         }
     }
 
-    public void misProductos(){
+    public void almacenarMisProductos(){
+        if(usuarioSesion!=null){
+            try {
+                this.misProductos= (ArrayList<Producto>) productoServicio.listarProductos(usuarioSesion);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public String irADetalle(String id){
+        return "detalle_mi_producto?faces-redirect=true&amp;producto="+id;
+    }
+
+    public String irADetalleCompra(String id){
+        this.codigoCompra= Integer.parseInt(id);
+        return "detalle_mi_compra?faces-redirect=true&amp;compra="+id;
+    }
 
 
+    public void listarMisCompras(){
+        if(usuarioSesion!=null){
+            try {
+                this.misCompras= (ArrayList<Compra>) compraServicio.listarComprasUsuario(usuarioSesion.getCodigo());
+                misCompras.forEach(System.out::println);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
+    public void listarMisDetallesCompras(){
+        if(usuarioSesion!=null){
+            try {
+                this.misDetallesCompra= detalleCompraServicio.listarDetallesCompra(codigoCompra);
+                misDetallesCompra.forEach(System.out::println);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }
