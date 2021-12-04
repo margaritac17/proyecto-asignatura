@@ -138,7 +138,6 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<Producto> listarProductos(Usuario usuario) throws Exception {
-        System.out.println(usuario.getCodigo());
         return productoRepo.listaProductosUsuario(usuario.getCodigo());
     }
 }
