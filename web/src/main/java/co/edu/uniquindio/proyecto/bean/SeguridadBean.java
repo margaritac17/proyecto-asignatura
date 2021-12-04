@@ -62,12 +62,17 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private List<DetalleCompra> misDetallesCompra;
 
+    @Getter @Setter
+    private List<Producto> productosFavoritos;
 
     @Getter @Setter
     private Float subtotal;
 
     @Getter @Setter
     private Float total;
+
+    @Getter @Setter
+    private boolean  estaEnFavoritos;
 
     @PostConstruct
     public void inicializar(){
@@ -77,6 +82,7 @@ public class SeguridadBean implements Serializable {
         this.misProductos= new ArrayList<>();
         this.misCompras= new ArrayList<>();
         this.misDetallesCompra= new ArrayList<>();
+        this.productosFavoritos= new ArrayList<>();
     }
 
     public String  iniciarSesion(){
@@ -186,6 +192,72 @@ public class SeguridadBean implements Serializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    //SEBAS
+    public int productosEnVenta(){
+        return misProductos.size();
+    }
+
+    public void agregarAlFavoritos(Producto producto){
+        try{
+            if(usuarioSesion!=null){
+                if(!productosFavoritos.contains(producto)) {
+                    productosFavoritos.add(producto);
+                    FacesMessage fmm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto agregado a favoritos");
+                    FacesContext.getCurrentInstance().addMessage("add-favorito", fmm);
+                }else{
+                    productosFavoritos.remove(producto);
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto eliminado de favoritos");
+                    FacesContext.getCurrentInstance().addMessage("add-favorito", fm);
+                }
+            }
+        } catch (Exception e) {
+            FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("add-favorito", fm);
+        }
+
+    }
+
+
+    public boolean encontrarProducto(Producto producto){
+        estaEnFavoritos= false;
+        try {
+            if(productosFavoritos!=null){
+                for(int i=0; i<productosFavoritos.size() && estaEnFavoritos==false ;i++){
+                    if(producto.getCodigo()==productosFavoritos.get(i).getCodigo()){
+                        estaEnFavoritos=true;
+                    }
+                }
+                return estaEnFavoritos;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return estaEnFavoritos;
+    }
+
+    public boolean estaEnFavoritosYLogueado(Producto producto){
+        if(autenticado){
+            if(encontrarProducto(producto)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public String getMensaje(Producto producto) {
+        if(autenticado){
+            if(encontrarProducto(producto)){
+                return "Eliminar de Favoritos";
+            }else{
+                return "Añadir a Favoritos";
+            }
+        }
+        return "";
+
     }
 
 }

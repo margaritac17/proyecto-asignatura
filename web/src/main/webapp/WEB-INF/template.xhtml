@@ -60,17 +60,24 @@
                             </a>
                         </li>
                         <li jsf:rendered="#{seguridadBean.autenticado}">
-                            <a href="/usuario/perfil.xhtml" class="nav-link text-white">
-                                <i class="pi pi-user bi d-block mx-auto mb-1 icon-menu"></i>
-                                Perfil
-                            </a>
-                        </li>
-                        <li jsf:rendered="#{seguridadBean.autenticado}">
                             <a href="/usuario/carrito.xhtml" class="nav-link text-white">
                                 <i class="pi pi-shopping-cart bi d-block mx-auto mb-1 icon-menu"></i>
                                 Carrito
                             </a>
                         </li>
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/lista_favoritos.xhtml" class="nav-link text-white">
+                                <i class="pi pi-heart bi d-block mx-auto mb-1 icon-menu"></i>
+                                Favoritos
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/perfil.xhtml" class="nav-link text-white">
+                                <i class="pi pi-user bi d-block mx-auto mb-1 icon-menu"></i>
+                                Perfil
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             </div>

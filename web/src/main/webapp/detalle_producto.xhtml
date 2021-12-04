@@ -30,10 +30,16 @@
 
                         <h1 class="mt-4">$#{detalleProductoBean.producto.precio}</h1>
 
-                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
+                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}" >
                             <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart"  action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo,detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal )}" update="@form" />
                             <p:growl for="add-cart" showDetail="true"/>
                         </h:form>
+
+                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}" >
+                            <p:commandButton value="#{seguridadBean.getMensaje(detalleProductoBean.producto)}" icon="pi pi-heart"  action="#{seguridadBean.agregarAlFavoritos(detalleProductoBean.producto)}" update="@form" />
+                            <p:growl for="add-favorito" showDetail="true"/>
+                        </h:form>
+
                     </div>
                     <div class="box">
                         <p>Ciudad: #{detalleProductoBean.producto.ciudad.nombreCiudad}</p>
