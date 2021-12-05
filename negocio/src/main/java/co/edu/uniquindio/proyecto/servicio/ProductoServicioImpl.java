@@ -60,7 +60,8 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<Producto> listarProductos(Categoria categoria) {
-        return productoRepo.listarPorCategoria(categoria);
+
+            return productoRepo.listarPorCategoria(categoria);
     }
 
     @Override

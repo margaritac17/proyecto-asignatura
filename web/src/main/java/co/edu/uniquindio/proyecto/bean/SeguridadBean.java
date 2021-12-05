@@ -1,10 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
-import co.edu.uniquindio.proyecto.entidades.Compra;
-import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicio.CompraServicio;
 import co.edu.uniquindio.proyecto.servicio.DetalleCompraServicio;
 import co.edu.uniquindio.proyecto.servicio.ProductoServicio;
@@ -35,6 +32,9 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private Usuario usuarioSesion;
 
+    @Getter @Setter
+    private Categoria categoria;
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
@@ -64,6 +64,9 @@ public class SeguridadBean implements Serializable {
 
     @Getter @Setter
     private List<Producto> productosFavoritos;
+
+    @Getter @Setter
+    private List<Producto> productosCategoria;
 
     @Getter @Setter
     private Float subtotal;
@@ -171,6 +174,8 @@ public class SeguridadBean implements Serializable {
     }
 
 
+
+
     public void listarMisCompras(){
         if(usuarioSesion!=null){
             try {
@@ -259,5 +264,21 @@ public class SeguridadBean implements Serializable {
         return "";
 
     }
+
+    //diego
+
+    public String irADetalleCategoria(Categoria nombreCategoria){
+        this.categoria = nombreCategoria;
+        //this.codigoCompra= Integer.parseInt(nombreCategoria);
+        return "categoria_producto?faces-redirect=true&amp;categoria="+nombreCategoria;
+    }
+
+    public void listarProductoCategoria(){
+        this.productosCategoria = productoServicio.listarProductos(categoria);
+        productosCategoria.forEach(System.out::println);
+    }
+
+
+
 
 }

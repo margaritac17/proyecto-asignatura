@@ -20,6 +20,10 @@ public class InicioBeam implements Serializable {
     @Getter @Setter
     private List<Producto> productos;
 
+    @Getter @Setter
+    private List<Producto> productosCategoria;
+
+
     @Autowired
     private ProductoServicio productoServicio;
 
@@ -28,8 +32,17 @@ public class InicioBeam implements Serializable {
         this.productos=productoServicio.listarTodosProductos();
     }
 
+
+
     public String irADetalle(String id){
         return "detalle_producto?faces-redirect=true&amp;producto="+id;
     }
+
+
+
+
+
+
+
 }
 
