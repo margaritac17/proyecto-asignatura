@@ -44,6 +44,7 @@
                         </p:repeat>
 
 
+                            
 
                     <h:form class="mt-4" rendered="#{seguridadBean.autenticado}" >
                         <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart"  action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo,detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal )}" update="@form" />
