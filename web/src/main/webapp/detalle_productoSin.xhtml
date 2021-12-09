@@ -18,7 +18,6 @@
                 nonce="ylDHl59T"></script>
 
         <div class="row" >
-
             <div class="col-lg-7 col-md-1">
                 <div class="box box-stretched">
                     <p:galleria rendered="#{detalleProductoBean.producto.imagenes.size() > 0}" value="#{detalleProductoBean.producto.imagenes}" var="imagen" panelHeight="425">
@@ -29,34 +28,32 @@
             </div>
 
             <div class="col-lg-5 col-md-1">
+                <div class="p-grid">
                     <div class="box">
-                    <p:rating value="#{detalleProductoBean.calificacionPromedio}" readonly="true"/>
-                    <h2 class="mt-4">#{detalleProductoBean.producto.nombre}</h2>
-                    <h1 class="mt-4">$#{detalleProductoBean.producto.precio}</h1>
+                        <p:rating value="#{detalleProductoBean.calificacionPromedio}" readonly="true"/>
+                        <h1 class="mt-4">#{detalleProductoBean.producto.nombre}</h1>
 
-                    <p class="mt-4 mb-0"><b>Ciudad: </b>#{detalleProductoBean.producto.ciudad.nombreCiudad}</p>
-                    <p class="mt-4 mb-0"><b>Vendedor: </b>#{detalleProductoBean.producto.vendedor.nombre}</p>
+                        <h1 class="mt-4">$#{detalleProductoBean.producto.precio}</h1>
 
-                    <div>
+                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}" >
+                            <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart"  action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo,detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal )}" update="@form" />
+                            <p:growl for="add-cart" showDetail="true"/>
+                        </h:form>
 
-                        <p:repeat value="#{detalleProductoBean.producto.categorias}" var="cat">
-                            <p:chip label="#{cat}"/>
-                        </p:repeat>
-
-
-
-                    <h:form class="mt-4" rendered="#{seguridadBean.autenticado}" >
-                        <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart"  action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo,detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal )}" update="@form" />
-                        <p:growl for="add-cart" showDetail="true"/>
-                    </h:form>
-
-                    <h:form class="mt-4" rendered="#{seguridadBean.autenticado}" >
-                        <p:commandButton value="#{seguridadBean.getMensaje(detalleProductoBean.producto)}" icon="pi pi-heart"  action="#{seguridadBean.agregarAlFavoritos(detalleProductoBean.producto)}" update="@form" />
-                        <p:growl for="add-favorito" showDetail="true"/>
-                    </h:form>
+                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}" >
+                            <p:commandButton value="#{seguridadBean.getMensaje(detalleProductoBean.producto)}" icon="pi pi-heart"  action="#{seguridadBean.agregarAlFavoritos(detalleProductoBean.producto)}" update="@form" />
+                            <p:growl for="add-favorito" showDetail="true"/>
+                        </h:form>
 
                     </div>
-                    <hr/>
+                    <div class="box">
+                        <p>Ciudad: #{detalleProductoBean.producto.ciudad.nombreCiudad}</p>
+                    </div>
+
+                    <p:dataList emptyMessage="No hay cayegorías para este producto" styleClass="lista-carac" value="#{detalleProductoBean.producto.categorias}" var="categoria">
+                        <f:facet name="header">Categoría</f:facet>
+                        <p>#{categoria}</p>
+                    </p:dataList>
 
                     <script>
                         window.twttr = (function(d, s, id) {
@@ -90,9 +87,7 @@
                             Tweet</a>
                     </div>
 
-
-
-            </div>
+                </div>
             </div>
         </div>
 
@@ -140,4 +135,4 @@
         </p:panel>
     </ui:define>
 </ui:composition>
-</html>
+></html>

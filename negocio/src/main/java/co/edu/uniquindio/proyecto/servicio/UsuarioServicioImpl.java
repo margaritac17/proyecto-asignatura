@@ -2,7 +2,9 @@ package co.edu.uniquindio.proyecto.servicio;
 
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.proyecciones.UsuarioBase;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +33,9 @@ public class UsuarioServicioImpl implements UsuarioServicio{
         if(buscado.isPresent()){
             throw new Exception("El username del usuario ya existe");
         }
+        StrongPasswordEncryptor passwordEncryptor= new StrongPasswordEncryptor();
+        u.setPassword(passwordEncryptor.encryptPassword(u.getPassword()));
+
         return usuarioRepo.save(u);
     }
 
@@ -62,6 +67,7 @@ public class UsuarioServicioImpl implements UsuarioServicio{
         return usuarioRepo.findAll();
     }
 
+
     @Override
     public List<Producto> listarFavoritos(String email)  throws Exception {
        Optional<Usuario> buscado =buscarPorEmail(email);
@@ -82,8 +88,12 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 
     @Override
     public Usuario iniciarSesion(String email, String password) throws Exception {
-
-       return usuarioRepo.findByEmailAndPassword(email, password).orElseThrow(() -> new Exception("Los datos de autenticacion son incorrectos"));
-
+       Usuario usuarioEmail=  usuarioRepo.findByEmail(email).orElseThrow(() -> new Exception("El usuario no existe"));
+        StrongPasswordEncryptor passwordEncryptor =new StrongPasswordEncryptor();
+        if(passwordEncryptor.checkPassword(password, usuarioEmail.getPassword())){
+            return usuarioEmail;
+        }else{
+            throw new Exception("La contraseña es incorrecta");
+        }
     }
 }

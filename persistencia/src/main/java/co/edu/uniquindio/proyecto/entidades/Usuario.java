@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -30,27 +31,32 @@ public class Usuario extends Persona implements Serializable {
 
     @OneToMany(mappedBy = "vendedor")
     @ToString.Exclude
+    @JsonIgnore
     private List<Producto> productosVenta;
 
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
+    @JsonIgnore
     private List<Comentario> comentarios;
 
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
+    @JsonIgnore
     private List<Compra> compras;
 
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
+    @JsonIgnore
     private List<DetalleSubasta> detalleSubastas;
-
 
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
+    @JsonIgnore
     private List<Chat> chats;
 
     @ManyToMany
     @ToString.Exclude
+    @JsonIgnore
     private List<Producto> productosFavoritos;
 
     @Builder

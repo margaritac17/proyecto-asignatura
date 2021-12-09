@@ -1,15 +1,14 @@
 package co.edu.uniquindio.proyecto.bean;
 
+import co.edu.uniquindio.proyecto.NegocioApplication;
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
-import co.edu.uniquindio.proyecto.servicio.CompraServicio;
-import co.edu.uniquindio.proyecto.servicio.DetalleCompraServicio;
-import co.edu.uniquindio.proyecto.servicio.ProductoServicio;
-import co.edu.uniquindio.proyecto.servicio.UsuarioServicio;
+import co.edu.uniquindio.proyecto.servicio.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +20,13 @@ import java.util.List;
 
 @Scope("session")
 @Component
-public class SeguridadBean implements Serializable {
+public class SeguridadBean implements Serializable  {
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @Getter @Setter
     private boolean autenticado;
@@ -37,6 +42,7 @@ public class SeguridadBean implements Serializable {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+
 
     @Autowired
     private ProductoServicio productoServicio;
@@ -67,6 +73,7 @@ public class SeguridadBean implements Serializable {
 
     @Getter @Setter
     private List<Producto> productosCategoria;
+
 
     @Getter @Setter
     private Float subtotal;
@@ -142,13 +149,16 @@ public class SeguridadBean implements Serializable {
     public void comprar(){
         if(usuarioSesion!=null && !productosCarrito.isEmpty()){
             try {
-                productoServicio.comprarProductos(usuarioSesion, productosCarrito, "PSE");
+                productoServicio.comprarProductos(usuarioSesion, productosCarrito, "Efectivo");
+                triggerMail();
                 productosCarrito.clear();
                 subtotal=0F;
+
                 FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada Satisfactoriamente");
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
 
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
             }
@@ -273,12 +283,43 @@ public class SeguridadBean implements Serializable {
         return "categoria_producto?faces-redirect=true&amp;categoria="+nombreCategoria;
     }
 
+    public String direccionarReporte(){
+        return "reportes?faces-redirect=true&amp";
+
+    }
+
     public void listarProductoCategoria(){
         this.productosCategoria = productoServicio.listarProductos(categoria);
         productosCategoria.forEach(System.out::println);
     }
 
+    public void triggerMail(){
+        System.out.println("1");
+        String mensaje = "<h1>UNISHOP</h1>";
+        mensaje += "<h2>Hola, " + usuarioSesion.getNombre() + "</h2>"
+                + "\n\nConfirmacion de Compra\n"
+                + "\n<h4>DETALLES DE LA COMPRA</h4>"
+                + "<P>" + productosCarritoMensaje() + "</P>"
+                + "<h2>Total compra: $" + subtotal
+                + "</h2></br></br>Atentamente, "
+                + "<h3>UNISHOP</h3>";
+        try {
+            emailSenderService.sendSimpleEmail("margaritacente2001.com", mensaje,
+                    "Compra Unishop");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-
+    public String  productosCarritoMensaje(){
+        String mensaje= "" ;
+        for (int i=0; i<productosCarrito.size();i++){
+            mensaje= mensaje.concat(productosCarrito.get(i).getNombre() ) + "    " ;
+            mensaje= mensaje.concat(String.valueOf(productosCarrito.get(i).getPrecio() ) )+ "    " ;
+            mensaje= mensaje.concat(String.valueOf(productosCarrito.get(i).getUnidades() ) )+ "    " ;
+            mensaje.concat(" \t" );
+        }
+        return mensaje;
+    }
 
 }
