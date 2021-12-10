@@ -7,11 +7,17 @@ import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @Service
 public class ProductoServicioImpl implements ProductoServicio {
@@ -20,6 +26,9 @@ public class ProductoServicioImpl implements ProductoServicio {
     private final ComentarioRepo comentarioRepo;
     private final CompraRepo compraRepo;
     private final DetalleCompraRepo detalleCompraRepo;
+
+    @Autowired
+    private EmailSenderService service;
 
     public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo comentarioRepo, DetalleCompraRepo detalleCompraRepo, CompraRepo compraRepo) {
         this.productoRepo = productoRepo;
@@ -38,8 +47,12 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public void actualizarProducto(Producto producto) throws Exception {
-
+    public Producto actualizarProducto(Producto p) throws Exception {
+        Optional<Producto> buscado= productoRepo.findById(p.getCodigo());
+        if(buscado.isEmpty()){
+            throw new Exception("El producto no existe");
+        }
+        return productoRepo.save(p);
     }
 
     @Override
@@ -136,9 +149,43 @@ public class ProductoServicioImpl implements ProductoServicio {
        }
     }
 
+    @Override
+    public List<Producto> listarProductosCiudad(String ciudad) {
+        return productoRepo.listaProductosCiudad(ciudad);
+    }
+
+    @Override
+    public List<Producto> listarProductosRangoUnidad(Integer unidad1, Integer unidad2) {
+        return productoRepo.listaProductosUnidades(unidad1, unidad2);
+    }
+
+    @Override
+    public List<Producto> listarProductosDescuento(Float descuento) {
+        return productoRepo.listaProductosDescuento(descuento);
+    }
+
+    @Override
+    public Integer cantidadProductosPorMes(Integer mes) {
+        LocalDate date1 = LocalDate.of(2021, mes, 01);
+        LocalDate date2 = LocalDate.of(2021, mes, 31);
+
+        return productoRepo.cantidadProductosPorMes(date1,date2);
+    }
+
+    @Override
+    public Integer medioPago(String medio) {
+        return productoRepo.cantidadMedioPago(medio);
+    }
+
 
     @Override
     public List<Producto> listarProductos(Usuario usuario) throws Exception {
         return productoRepo.listaProductosUsuario(usuario.getCodigo());
     }
+
+    @Override
+    public List<Producto> listarProductosRangoPrecio(Float precio1, Float precio2) throws Exception {
+        return productoRepo.listarProductosRangoPrecio(precio1, precio2);
+    }
+
 }

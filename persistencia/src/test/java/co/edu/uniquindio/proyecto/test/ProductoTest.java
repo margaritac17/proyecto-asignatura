@@ -93,6 +93,33 @@ public class ProductoTest {
         lista.forEach(System.out::println);
 
     }
+    @Test
+    @Sql("classpath:data.sql")
+    public void listaProductosRango(){
+        List<Producto> lista= productoRepo.listarProductosRangoPrecio(0F , 3000000F);
+        lista.forEach(System.out::println);
+        System.out.println(lista.size());
+
+    }
+    @Test
+    @Sql("classpath:data.sql")
+    public void cantidadProductosPorMes(){
+        LocalDate date1 = LocalDate.of(2021, 02, 01);
+        LocalDate date2 = LocalDate.of(2021, 02, 19);
+        Integer cantidad= productoRepo.cantidadProductosPorMes(date1,date2);
+        System.out.println(cantidad);
+
+
+    }
+
+    @Test
+    @Sql("classpath:data.sql")
+    public void calificacion(){
+        Integer p= productoRepo.calificacionPromedio(1);
+        System.out.println(p);
+
+    }
+
 
 
 }

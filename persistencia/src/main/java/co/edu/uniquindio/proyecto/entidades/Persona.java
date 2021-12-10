@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -36,6 +37,7 @@ public class Persona implements Serializable {
     @Column(nullable = false, length= 100)
     @Length(max = 100, message = "La contraseña debe tener maximo 100 caracteres")
     @NotBlank
+    //@JsonIgnore
     private String password;
 
 }
