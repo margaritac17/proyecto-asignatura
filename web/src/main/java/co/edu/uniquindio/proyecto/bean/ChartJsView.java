@@ -402,7 +402,7 @@ public class ChartJsView implements Serializable {
         ChartData data = new ChartData();
 
         BarChartDataSet barDataSet = new BarChartDataSet();
-        barDataSet.setLabel("Medio de Pago");
+        barDataSet.setLabel("My First Dataset");
         barDataSet.setBackgroundColor("rgba(255, 99, 132, 0.2)");
         barDataSet.setBorderColor("rgb(255, 99, 132)");
         barDataSet.setBorderWidth(1);
